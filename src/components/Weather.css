@@ -1,69 +1,177 @@
-.weather {
-  place-self: center;
-  padding: 40px;
-  border-radius: 10px;
-  background-image: linear-gradient(45deg, #2f4680, #500ae4);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.scarch-bar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.scarch-bar input {
-  height: 50px;
-  border: none;
-  outline: none;
-  border-radius: 40px;
-  padding-left: 25px;
-  color: #626262;
-  background: #ebfffc;
-  font-size: 18px;
-}
-.scarch-bar img {
-  width: 50px;
-  height: 50px;
-  padding: 15px;
-  border-radius: 50%;
-  background: #befffc;
-  cursor: pointer;
-}
-.wearhet-icon {
-  width: 150px;
-  margin: 30px 0;
+/* Container: full screen, center content, gradient background */
+.weather-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(90deg, #3b82f6, #4f46e5, #7c3aed);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.tempr {
-  color: white;
-  font-size: 80px;
-  list-style: 1;
-}
-.cityname {
-  color: wheat;
-  font-size: 30px;
-}
-
-.weather-deta {
-  width: 100%;
-  margin-top: 40px;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-.weather-deta .col {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 22px;
-}
-.weather-deta .col span {
-  display: block;
-  font-size: 16px;
+/* Card with translucent white bg + blur + rounded corners + shadow */
+.weather-card {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px rgba(124, 58, 237, 0.5);
+    transition: box-shadow 0.3s ease;
 }
 
-.weather-deta .col img {
-  width: 26px;
-  margin-top: 10px;
+.weather-card:hover {
+    box-shadow: 0 30px 60px rgba(124, 58, 237, 0.7);
+}
+
+/* Search bar: flex row with input and button */
+.search-bar {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+/* Input styles */
+.search-input {
+    flex-grow: 1;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111;
+}
+
+.search-input::placeholder {
+    color: #d1d5db;
+    /* Tailwind's gray-300 */
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #818cf8;
+    /* Indigo-400 ring */
+}
+
+/* Button styles */
+.search-button {
+    background-color: #3730a3;
+    /* Indigo-900 */
+    border: none;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #4c51bf;
+    /* Indigo-800 */
+}
+
+.search-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Weather info container */
+.weather-info {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Main weather display (icon, temp, location) */
+.weather-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.weather-icon {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.temperature {
+    font-size: 3.75rem;
+    /* 6xl */
+    font-weight: 800;
+    margin: 0;
+}
+
+.location {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+/* Weather details container */
+.weather-details {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(55, 48, 163, 0.6);
+    /* Indigo-900 bg with opacity */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Each detail item (humidity, wind) */
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.detail-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.detail-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    color: #a5b4fc;
+    /* Indigo-300 */
+}
+
+/* Loading text */
+.loading-text {
+    text-align: center;
+    font-size: 1.125rem;
+    animation: pulse 2s infinite;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
